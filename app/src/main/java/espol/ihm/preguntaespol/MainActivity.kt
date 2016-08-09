@@ -1,7 +1,9 @@
 package espol.ihm.preguntaespol
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -37,6 +39,12 @@ class MainActivity : AppCompatActivity() {
 
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         setupDrawerContent(mDrawerLayout, navigationView);
+
+        val fab = findViewById(R.id.fab) as FloatingActionButton
+        fab.setOnClickListener {
+            val intent = Intent(this, AskActivity::class.java)
+            startActivity(intent);
+        }
     }
 
     private fun setupDrawerContent(mDrawerLayout: DrawerLayout, navigationView: NavigationView) {

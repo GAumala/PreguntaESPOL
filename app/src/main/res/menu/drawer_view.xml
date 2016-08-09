@@ -20,17 +20,19 @@
 
 
         <item
-            android:id="@+id/nav_friends"
+            android:id="@+id/nav_preguntas"
             android:title="Mis Preguntas" />
         <item
-            android:id="@+id/nav_messages"
+            android:id="@+id/nav_respuestas"
             android:title="Mis Respuestas" />
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_recompensas"
             android:title="Mis Recompensas" />
-
+        <item
+            android:id="@+id/nav_anuncios"
+            android:title="Mis Anuncios" />
     </group>
-
+<!--
     <item android:title="Sub items">
         <menu>
             <item
@@ -38,5 +40,5 @@
 
         </menu>
     </item>
-
+ -->
 </menu>
