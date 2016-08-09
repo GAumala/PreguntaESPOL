@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = MyFragmentAdapter(supportFragmentManager);
-        adapter.addFragment(MyListFragment(), "News Feed");
+        adapter.addFragment(MyListFragment(), "Descubrir");
         adapter.addFragment(MyListFragment(), "Materias");
         viewPager.adapter = adapter;
     }
