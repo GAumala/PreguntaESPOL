@@ -16,32 +16,21 @@
 
 package espol.ihm.preguntaespol
 
-import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.TypedValue
+import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 
-
-import java.util.ArrayList
-import java.util.Random
-
-import espol.ihm.preguntaespol.R
 
 class MyListFragment : Fragment() {
 
+    var adapter: Adapter<ScoreItemHolder>? = null
     companion object {
         val FRAGMENT_TYPE = "MyListFragment.fragmentType"
-
         val LS_PREGUNTAS_FRAGMENT = 1
         val LS_MATERIAS_FRAGMENT = 2
         val PREGUNTA_FRAGMENT = 3
@@ -64,15 +53,22 @@ class MyListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
         when(arguments.getInt(FRAGMENT_TYPE, 0)){
             LS_PREGUNTAS_FRAGMENT -> {
-                recyclerView.adapter = ActivityFeedAdapter(activity)
+                adapter = ActivityFeedAdapter(activity)
+                recyclerView.adapter = adapter!!
                 val scrollableActivity = activity as ScrollableActivity
                 recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
             }
             PREGUNTA_FRAGMENT -> {
-                recyclerView.adapter = AnswersAdapter(activity,
+                adapter = AnswersAdapter(activity,
                         (activity as PreguntaDetailActivity).selectedPregunta)
+                recyclerView.adapter = adapter!!
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        adapter?.notifyDataSetChanged()
     }
 
 }
