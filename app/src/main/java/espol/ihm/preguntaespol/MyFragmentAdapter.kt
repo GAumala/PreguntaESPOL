@@ -30,4 +30,9 @@ class MyFragmentAdapter(fn: FragmentManager) : FragmentPagerAdapter(fn) {
     override fun getPageTitle(position: Int): CharSequence {
         return mFragmentTitles[position];
     }
+
+    fun getFragmentTag(viewPagerId: Int, fragmentPosition: Int): String
+    {
+        return "android:switcher:$viewPagerId:$fragmentPosition";
+    }
 }

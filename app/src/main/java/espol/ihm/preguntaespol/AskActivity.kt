@@ -1,5 +1,7 @@
 package espol.ihm.preguntaespol
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
@@ -64,11 +66,25 @@ class AskActivity : AppCompatActivity() {
             isValid = false
         }
 
+        if(isValid){
+            val intent = Intent()
+            intent.putExtra(TITLE_KEY, tituloStr.toString())
+            intent.putExtra(CONTENT_KEY, descStr.toString())
+            intent.putExtra(MATERIA_KEY, materiaStr.toString())
+            setResult(Activity.RESULT_OK, intent)
+        }
+
         return isValid
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.editor_actions, menu);
         return true;
+    }
+
+    companion object {
+        val TITLE_KEY = "AskActivity.title"
+        val CONTENT_KEY = "AskActivity.content"
+        val MATERIA_KEY = "AskActivity.materia"
     }
 }

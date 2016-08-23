@@ -45,6 +45,10 @@ class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolde
 
     }
 
+    fun addNewPregunta(newPregunta: Pregunta){
+        preguntaList.add(0, newPregunta)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ScoreItemHolder {
         return ScoreItemHolder(LayoutInflater.from(ctx).inflate(
                 R.layout.pregunta_text, parent, false), mBackground)

@@ -1,5 +1,6 @@
 package espol.ihm.preguntaespol
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
     lateinit var mDrawerLayout: DrawerLayout
     lateinit var fab: FloatingActionButton
 
+    lateinit var fragmentAdapter: MyFragmentAdapter
     private val myScrollListener = object : RecyclerView.OnScrollListener(){
         private var fabIsVisible: Boolean = true
         override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener {
             val intent = Intent(this, AskActivity::class.java)
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_ASK);
         }
     }
 
@@ -92,10 +94,10 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         return super.onOptionsItemSelected(item);
     }
     private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = MyFragmentAdapter(supportFragmentManager);
-        adapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_PREGUNTAS_FRAGMENT), "Descubrir");
-        adapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_MATERIAS_FRAGMENT), "Materias");
-        viewPager.adapter = adapter;
+        fragmentAdapter= MyFragmentAdapter(supportFragmentManager);
+        fragmentAdapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_PREGUNTAS_FRAGMENT), "Descubrir");
+        fragmentAdapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_MATERIAS_FRAGMENT), "Materias");
+        viewPager.adapter = fragmentAdapter;
         viewPager.offscreenPageLimit = 1
     }
 
@@ -109,7 +111,24 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         return myScrollListener
     }
 
+    fun insertarNuevaPregunta(data: Intent){
+        val titlo = data!!.getStringExtra(AskActivity.TITLE_KEY)
+        val desc = data!!.getStringExtra(AskActivity.CONTENT_KEY)
+        val materia = data!!.getStringExtra(AskActivity.MATERIA_KEY)
+        val newPregunta = Pregunta(titlo, desc, 0, System.currentTimeMillis(), materia)
+        val feedFragment = supportFragmentManager.findFragmentByTag(
+                fragmentAdapter.getFragmentTag(R.id.viewpager, 0)) as MyListFragment
+        (feedFragment.adapter as ActivityFeedAdapter).addNewPregunta(newPregunta)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_ASK){
+            insertarNuevaPregunta(data!!)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     companion object {
         var selectedPregunta: Pregunta? = null
+        val REQUEST_ASK = 600
     }
 }
