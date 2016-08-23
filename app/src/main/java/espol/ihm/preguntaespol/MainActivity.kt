@@ -71,8 +71,9 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = MyFragmentAdapter(supportFragmentManager);
-        adapter.addFragment(MyListFragment(), "Descubrir");
-        adapter.addFragment(MyListFragment(), "Materias");
+        adapter.addFragment(MyListFragment.newInstance(true), "Descubrir");
+        adapter.addFragment(MyListFragment.newInstance(false), "Materias");
         viewPager.adapter = adapter;
+        viewPager.offscreenPageLimit = 1
     }
 }

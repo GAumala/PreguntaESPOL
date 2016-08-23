@@ -38,70 +38,27 @@ import espol.ihm.preguntaespol.R
 
 class MyListFragment : Fragment() {
 
+    companion object {
+        val IS_PREGUNTAS = "MyListFragment.isPreguntas"
+        fun newInstance(isPreguntas: Boolean): MyListFragment{
+            val newInstanceFrag = MyListFragment()
+            val newBundle = Bundle()
+            newBundle.putBoolean(IS_PREGUNTAS, isPreguntas)
+            newInstanceFrag.arguments = newBundle
+            return newInstanceFrag
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rv = inflater!!.inflate(
-                R.layout.list, container, false) as View
-        //setupRecyclerView(rv)
+        val rv = inflater!!.inflate(R.layout.list, container, false) as RecyclerView
+        setupRecyclerView(rv)
         return rv
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-        //recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-        //      getRandomSublist(Cheeses.sCheeseStrings, 30)));
+        if(arguments.getBoolean(IS_PREGUNTAS, false))
+            recyclerView.adapter = PreguntaAdapter(activity)
     }
 
-    private fun getRandomSublist(array: Array<String>, amount: Int): List<String> {
-        val list = ArrayList<String>(amount)
-        val random = Random()
-        while (list.size < amount) {
-            list.add(array[random.nextInt(array.size)])
-        }
-        return list
-    }
-
-    class SimpleStringRecyclerViewAdapter(context: Context, private val mValues: List<String>) : RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder>() {
-
-        private val mTypedValue = TypedValue()
-        private val mBackground: Int
-
-        class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-            var mBoundString: String? = null
-            val mImageView: ImageView
-            val mTextView: TextView
-
-            init {
-                mImageView = mView.findViewById(R.id.avatar) as ImageView
-                mTextView = mView.findViewById(android.R.id.text1) as TextView
-            }
-
-            override fun toString(): String {
-                return super.toString() + " '" + mTextView.text
-            }
-        }
-
-        fun getValueAt(position: Int): String {
-            return mValues[position]
-        }
-
-        init {
-            context.theme.resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true)
-            mBackground = mTypedValue.resourceId
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-            view.setBackgroundResource(mBackground)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.mBoundString = mValues[position]
-            holder.mTextView.text = mValues[position]
-        }
-
-        override fun getItemCount(): Int {
-            return mValues.size
-        }
-    }
 }
