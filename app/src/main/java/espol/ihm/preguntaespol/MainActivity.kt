@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.app.ListFragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
@@ -18,7 +19,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
 
-class MainActivity : AppCompatActivity(), ScrollableActivity {
+class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity {
 
     lateinit var mDrawerLayout: DrawerLayout
     lateinit var fab: FloatingActionButton
@@ -92,13 +93,23 @@ class MainActivity : AppCompatActivity(), ScrollableActivity {
     }
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = MyFragmentAdapter(supportFragmentManager);
-        adapter.addFragment(MyListFragment.newInstance(true), "Descubrir");
-        adapter.addFragment(MyListFragment.newInstance(false), "Materias");
+        adapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_PREGUNTAS_FRAGMENT), "Descubrir");
+        adapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_MATERIAS_FRAGMENT), "Materias");
         viewPager.adapter = adapter;
         viewPager.offscreenPageLimit = 1
     }
 
+    override fun showPregunta(pregunta: Pregunta){
+        selectedPregunta = pregunta
+        val intent = Intent(this, PreguntaDetailActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun getScrollListener(): RecyclerView.OnScrollListener {
         return myScrollListener
+    }
+
+    companion object {
+        var selectedPregunta: Pregunta? = null
     }
 }

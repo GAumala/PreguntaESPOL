@@ -18,6 +18,7 @@ package espol.ihm.preguntaespol
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.TextViewCompat
@@ -39,11 +40,15 @@ import espol.ihm.preguntaespol.R
 class MyListFragment : Fragment() {
 
     companion object {
-        val IS_PREGUNTAS = "MyListFragment.isPreguntas"
-        fun newInstance(isPreguntas: Boolean): MyListFragment{
+        val FRAGMENT_TYPE = "MyListFragment.fragmentType"
+
+        val LS_PREGUNTAS_FRAGMENT = 1
+        val LS_MATERIAS_FRAGMENT = 2
+        val PREGUNTA_FRAGMENT = 3
+        fun newInstance(fragmentType: Int): MyListFragment{
             val newInstanceFrag = MyListFragment()
             val newBundle = Bundle()
-            newBundle.putBoolean(IS_PREGUNTAS, isPreguntas)
+            newBundle.putInt(FRAGMENT_TYPE, fragmentType)
             newInstanceFrag.arguments = newBundle
             return newInstanceFrag
         }
@@ -57,10 +62,17 @@ class MyListFragment : Fragment() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-        if(arguments.getBoolean(IS_PREGUNTAS, false))
-            recyclerView.adapter = PreguntaAdapter(activity)
-        val scrollableActivity = activity as ScrollableActivity
-        recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
+        when(arguments.getInt(FRAGMENT_TYPE, 0)){
+            LS_PREGUNTAS_FRAGMENT -> {
+                recyclerView.adapter = ActivityFeedAdapter(activity)
+                val scrollableActivity = activity as ScrollableActivity
+                recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
+            }
+            PREGUNTA_FRAGMENT -> {
+                recyclerView.adapter = AnswersAdapter(activity,
+                        (activity as PreguntaDetailActivity).selectedPregunta)
+            }
+        }
     }
 
 }

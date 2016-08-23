@@ -15,8 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AskActivity"
-            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".PreguntaDetailActivity" />
+        <activity
+            android:name=".AskActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".PreguntaDetailActivity"></activity>
     </application>
 
 </manifest>
