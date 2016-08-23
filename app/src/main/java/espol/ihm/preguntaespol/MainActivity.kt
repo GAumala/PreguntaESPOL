@@ -11,13 +11,34 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.animation.AnimationUtils
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ScrollableActivity {
+
     lateinit var mDrawerLayout: DrawerLayout
+    lateinit var fab: FloatingActionButton
+
+    private val myScrollListener = object : RecyclerView.OnScrollListener(){
+        private var fabIsVisible: Boolean = true
+        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            if(fabIsVisible && dy > 0){
+                //Toast.makeText(this@MainTabActivity, "Hide", Toast.LENGTH_SHORT).show()
+                val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_out_down);
+                fab.startAnimation(anim)
+                fabIsVisible = false
+            } else if(!fabIsVisible && dy < 0){
+                //Toast.makeText(this@MainTabActivity, "Show", Toast.LENGTH_SHORT).show()
+                val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_in_up);
+                fab.startAnimation(anim)
+                fabIsVisible = true
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         setupDrawerContent(mDrawerLayout, navigationView);
 
-        val fab = findViewById(R.id.fab) as FloatingActionButton
+        fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener {
             val intent = Intent(this, AskActivity::class.java)
             startActivity(intent);
@@ -75,5 +96,9 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(MyListFragment.newInstance(false), "Materias");
         viewPager.adapter = adapter;
         viewPager.offscreenPageLimit = 1
+    }
+
+    override fun getScrollListener(): RecyclerView.OnScrollListener {
+        return myScrollListener
     }
 }

@@ -14,7 +14,9 @@ class CrearPreguntas {
             val pregunta1 = Pregunta("¿Cómo funciona Quicksort?", "Tengo que implementar Quicksort en C pero no entiendo", 10, 1471478400, "Programación")
             val pregunta2 = Pregunta("¿Cuál es la diferencia entre precisión y exactitud?", "Nos mandaron de deber averiguarlo para laboratorio de Física.", 3, 1470355200, "Física")
             val pregunta3 = Pregunta("¿Cómo demostrar la Convolución?", "Demostrar con fotos por favor.", 5, 1470582000, "Ec.Diferenciales")
+            pregunta3.scoreUsuario = 1
             val pregunta4 = Pregunta("¿Examen final de Ecología?", "¿Qué toman en el examen final de Ecología?", -4, 1469476800, "Ecología")
+            pregunta4.scoreUsuario = -1
             val pregunta5 = Pregunta("¿Qué es una interfaz?", "Nos preguntaron esto en fundamentos, nadie supo la respuesta.", 1, 1470063600, "Programación")
             val pregunta6 = Pregunta("¿Cómo calcular el interés compuesto?", "Necesito la fórmula y un ejemplo por favor.", 5, 1469217600, "Ing.Económica")
             val pregunta7 = Pregunta("¿Qué es herencia y polimorfismo?", "Pregunta de la clase de POO", 6, 1469476800, "Programación")

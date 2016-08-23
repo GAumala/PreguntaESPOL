@@ -1,7 +1,9 @@
 package espol.ihm.preguntaespol
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +38,28 @@ class PreguntaAdapter(val ctx: Context): RecyclerView.Adapter<PreguntaAdapter.Pr
         preguntaHolder.setSummary(pregunta.contenido)
         preguntaHolder.setDate(pregunta.date)
         preguntaHolder.setMateria(pregunta.materia)
+        preguntaHolder.setPoints(pregunta.score)
+        preguntaHolder.setVote(pregunta.scoreUsuario)
 
+        preguntaHolder.setUpvoteListener(View.OnClickListener {
+            if(pregunta.scoreUsuario != 1){
+                pregunta.score += 1
+                pregunta.scoreUsuario += 1
+                preguntaHolder.setVote(pregunta.scoreUsuario)
+                preguntaHolder.setPoints(pregunta.score)
+            }
+        })
+
+        preguntaHolder.setDownvoteListener(View.OnClickListener {
+            if(pregunta.scoreUsuario != -1){
+                Log.d("adapter", "b${pregunta.score}")
+                pregunta.score -= 1
+                Log.d("adapter", "a${pregunta.score}")
+                pregunta.scoreUsuario -= 1
+                preguntaHolder.setVote(pregunta.scoreUsuario)
+                preguntaHolder.setPoints(pregunta.score)
+            }
+        })
 
 
     }
@@ -69,6 +92,13 @@ class PreguntaAdapter(val ctx: Context): RecyclerView.Adapter<PreguntaAdapter.Pr
             view.findViewById(R.id.root).setBackgroundResource(mBackground)
         }
 
+        fun setUpvoteListener(listener: View.OnClickListener){
+            upvote.setOnClickListener(listener)
+        }
+
+        fun setDownvoteListener(listener: View.OnClickListener){
+            downvote.setOnClickListener(listener)
+        }
         fun setTitle(titleText: String){
             title.text = titleText
         }
@@ -91,6 +121,22 @@ class PreguntaAdapter(val ctx: Context): RecyclerView.Adapter<PreguntaAdapter.Pr
 
         fun setMateria(materiaTxt: String){
             materia.text = "#$materiaTxt"
+        }
+
+        fun setVote(userVote: Int){
+            if(userVote == 0){
+                upvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up))
+                downvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_down))
+                points.setTextColor(ContextCompat.getColor(points.context, R.color.neutral))
+            } else if(userVote == 1){
+                upvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up_pressed))
+                downvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_down))
+                points.setTextColor(ContextCompat.getColor(points.context, R.color.upvote))
+            } else {
+                upvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up))
+                downvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_down_pressed))
+                points.setTextColor(ContextCompat.getColor(points.context, R.color.downvote))
+            }
         }
     }
 

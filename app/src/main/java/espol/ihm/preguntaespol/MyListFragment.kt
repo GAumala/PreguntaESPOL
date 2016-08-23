@@ -59,6 +59,8 @@ class MyListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
         if(arguments.getBoolean(IS_PREGUNTAS, false))
             recyclerView.adapter = PreguntaAdapter(activity)
+        val scrollableActivity = activity as ScrollableActivity
+        recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
     }
 
 }
