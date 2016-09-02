@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_scrollFlags="scroll|enterAlways|snap" />
@@ -30,21 +31,21 @@
             android:id="@+id/materias_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Materia"
+            android:hint="@string/form_title_materia"
             app:met_floatingLabel="normal" />
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/titulo_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:met_maxCharacters="50"
-            android:hint="Título"
+            android:hint="@string/form_title_titulo"
             app:met_floatingLabel="normal" />
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/desc_edittext"
             android:layout_height="0dp"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:hint="Descripción"
+            android:hint="@string/form_title_descripcion"
 
             android:gravity="top"
             app:met_floatingLabel="normal" />

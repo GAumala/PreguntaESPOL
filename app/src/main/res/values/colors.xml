@@ -6,4 +6,6 @@
     <color name="upvote">#4CAF50</color>
     <color name="downvote">#E53935</color>
     <color name="neutral">#aaa</color>
+    <color name="cardBackground">#FFF</color>
+    <color name="cardText">#000</color>
 </resources>
