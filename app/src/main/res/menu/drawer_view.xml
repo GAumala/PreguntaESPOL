@@ -18,19 +18,21 @@
 
     <group android:checkableBehavior="single">
 
-
         <item
             android:id="@+id/nav_preguntas"
-            android:title="Mis Preguntas" />
+            android:icon="@drawable/ic_forum_black_24dp"
+            android:title="@string/mis_preguntas" />
         <item
             android:id="@+id/nav_respuestas"
-            android:title="Mis Respuestas" />
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="@string/mis_respuestas" />
         <item
             android:id="@+id/nav_recompensas"
-            android:title="Mis Recompensas" />
+            android:icon="@drawable/ic_redeem_black_24dp"
+            android:title="@string/mis_recompensas" />
         <item
             android:id="@+id/nav_anuncios"
-            android:title="Mis Anuncios" />
+            android:title="@string/mis_anuncios" />
     </group>
 <!--
     <item android:title="Sub items">
