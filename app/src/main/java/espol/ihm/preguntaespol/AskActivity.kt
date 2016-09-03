@@ -20,10 +20,9 @@ class AskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ask)
-        val adapter = ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, arrayOf("Física A",
-                "Álgebra Lineal", "Estadística", "Cálculo Integral", "Cálculo Diferencial",
-                "Estructuras de Datos", "Análisis de Algoritmos", "Análisis de Redes Eléctricas"));
+        val res = resources
+        val materias = res.getStringArray(R.array.materias_array)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, materias);
         materiasSpinner = findViewById(R.id.materias_spinner) as MaterialBetterSpinner
         tituloEditText = findViewById(R.id.titulo_edittext) as MaterialEditText
         descEditText = findViewById(R.id.desc_edittext) as MaterialEditText

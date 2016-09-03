@@ -15,7 +15,8 @@
                     android:id="@+id/upvote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_thumb_up_black_36dp"/>
+                    android:src="@drawable/ic_thumb_up"
+                    />
                 <TextView
                     android:id="@+id/points"
                     android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
                     android:id="@+id/downvote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_thumb_down_black_36dp"/>
+                    android:src="@drawable/ic_thumb_down"
+                    />
             </LinearLayout>
             <TextView
                 android:id="@+id/pregunta_summary"
