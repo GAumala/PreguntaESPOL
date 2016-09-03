@@ -130,5 +130,6 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
     companion object {
         var selectedPregunta: Pregunta? = null
         val REQUEST_ASK = 600
+        val REQUEST_ANSWER = 601
     }
 }

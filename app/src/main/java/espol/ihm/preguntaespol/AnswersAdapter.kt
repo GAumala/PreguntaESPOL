@@ -22,6 +22,7 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
         val preguntaHolder = holder!!
         if( position == 0) { //PREGUNTA
             preguntaHolder.bindScoreItem(pregunta)
+
         } else //RESUPESTA
             preguntaHolder.bindScoreItem(pregunta.respuestas[position - 1])
     }
@@ -29,8 +30,8 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ScoreItemHolder {
         return when(viewType){
             PREGUNTA -> {
-                ScoreItemHolder(LayoutInflater.from(ctx).inflate(
-                    R.layout.pregunta_detail_item, parent, false), null)
+                PreguntaDetailHolder(LayoutInflater.from(ctx).inflate(
+                    R.layout.pregunta_detail_item, parent, false))
             }
             else -> {
                 val item = ScoreItemHolder(LayoutInflater.from(ctx).inflate(

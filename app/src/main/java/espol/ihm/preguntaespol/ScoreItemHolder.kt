@@ -10,7 +10,7 @@ import espol.ihm.preguntaespol.utils.Utils
 /**
  * Created by gesuwall on 8/23/16.
  */
-class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHolder(view) {
+open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHolder(view) {
         val title: TextView?
         val username: TextView?
         val text: TextView

@@ -1,5 +1,7 @@
 package espol.ihm.preguntaespol
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
@@ -52,11 +54,31 @@ class PreguntaDetailActivity : AppCompatActivity() {
 
     }
 
+    fun answer(){
+        val intent = Intent(this, AnswerActivity::class.java)
+        startActivityForResult(intent, MainActivity.REQUEST_ANSWER)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item!!.itemId == android.R.id.home){
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun insertarNuevaRespuesta(data: Intent){
+        val desc = data!!.getStringExtra(AskActivity.CONTENT_KEY)
+        val newRes = Respuesta(desc, 0, System.currentTimeMillis())
+        selectedPregunta.respuestas.add(newRes)
+        val listFragment = supportFragmentManager.findFragmentById(R.id.container) as MyListFragment
+        listFragment.adapter?.notifyItemInserted(selectedPregunta.respuestas.size - 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_ANSWER){
+            insertarNuevaRespuesta(data!!)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onDestroy() {

@@ -17,9 +17,10 @@
         </activity>
         <activity android:name=".PreguntaDetailActivity" />
         <activity
-            android:name=".AskActivity"
+            android:name=".AskActivity"/>
+        <activity
+            android:name=".AnswerActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".PreguntaDetailActivity"></activity>
     </application>
 
 </manifest>
