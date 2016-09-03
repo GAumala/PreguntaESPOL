@@ -11,4 +11,7 @@
     <string name="mis_respuestas">Mis Respuestas</string>
     <string name="mis_recompensas">Mis Recompensas</string>
     <string name="mis_anuncios">Mis Anuncios</string>
+    <string name="placeholder_titulo_anuncio_card">Publicar anuncio de Fisica</string>
+    <string name="placeholder_body_anuncio_card">Le permite publicar un anuncio en el feed de Fisica A</string>
+    <string name="btn_recompensa_card">CANJEAR</string>
 </resources>
