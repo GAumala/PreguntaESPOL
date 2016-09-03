@@ -14,4 +14,15 @@
     <string name="placeholder_titulo_anuncio_card">Publicar anuncio de Fisica</string>
     <string name="placeholder_body_anuncio_card">Le permite publicar un anuncio en el feed de Fisica A</string>
     <string name="btn_recompensa_card">CANJEAR</string>
+    <string-array
+        name="materias_array">
+        <item>Física A</item>
+        <item>Álgebra Lineal</item>
+        <item>Estadística</item>
+        <item>Cálculo Integral</item>
+        <item>Cálculo Diferencial</item>
+        <item>Estructuras de Datos</item>
+        <item>Análisis de Algoritmos</item>
+        <item>Análisis de Redes Eléctricas</item>
+    </string-array>
 </resources>
