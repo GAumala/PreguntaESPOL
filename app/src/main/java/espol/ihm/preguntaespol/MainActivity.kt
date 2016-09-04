@@ -7,13 +7,15 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.support.v4.app.ListFragment
 import android.support.v4.view.GravityCompat
+import android.support.v4.view.MenuItemCompat
+import android.support.v4.view.MenuItemCompat.OnActionExpandListener
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
 
     lateinit var mDrawerLayout: DrawerLayout
     lateinit var fab: FloatingActionButton
+    lateinit var viewPager: ViewPager
 
     lateinit var fragmentAdapter: MyFragmentAdapter
     private val myScrollListener = object : RecyclerView.OnScrollListener(){
@@ -54,8 +57,8 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         ab.setDisplayHomeAsUpEnabled(true);
 
 
-        val viewPager =  findViewById(R.id.viewpager) as ViewPager
-        setupViewPager(viewPager);
+        viewPager =  findViewById(R.id.viewpager) as ViewPager
+        setupViewPager(viewPager, savedInstanceState != null);
         val tabLayout = findViewById(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(viewPager)
 
@@ -81,7 +84,38 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        fun onNewQuery(query: String?){
+            val fragment = fragmentAdapter.getItem(viewPager.currentItem) as MyListFragment
+            fragment.onNewQuery(query)
+        }
+
         menuInflater.inflate(R.menu.sample_actions, menu);
+        val searchItem = menu.findItem(R.id.action_search)
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, object : OnActionExpandListener {
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                onNewQuery("")
+                return true
+            }
+
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean { return true}
+
+        })
+
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextChange(newText: String?): Boolean {
+                onNewQuery(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+        })
+
         return true;
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -93,10 +127,15 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         }
         return super.onOptionsItemSelected(item);
     }
-    private fun setupViewPager(viewPager: ViewPager) {
+    private fun setupViewPager(viewPager: ViewPager, restored: Boolean) {
         fragmentAdapter= MyFragmentAdapter(supportFragmentManager);
-        fragmentAdapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_PREGUNTAS_FRAGMENT), "Descubrir");
-        fragmentAdapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_MATERIAS_FRAGMENT), "Materias");
+        if(!restored) {
+            fragmentAdapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_PREGUNTAS_FRAGMENT), "Descubrir");
+            fragmentAdapter.addFragment(MyListFragment.newInstance(MyListFragment.LS_MATERIAS_FRAGMENT), "Materias");
+        } else {//Si se roto la pantalla los fragments siguen ahi, solo hay que buscarlos
+            fragmentAdapter.addFragment(supportFragmentManager.findFragmentByTag(fragmentAdapter.getFragmentTag(R.id.viewpager, 0)), "Descubrir")
+            fragmentAdapter.addFragment(supportFragmentManager.findFragmentByTag(fragmentAdapter.getFragmentTag(R.id.viewpager, 1)), "Materias")
+        }
         viewPager.adapter = fragmentAdapter;
         viewPager.offscreenPageLimit = 1
     }
@@ -130,5 +169,6 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
     companion object {
         var selectedPregunta: Pregunta? = null
         val REQUEST_ASK = 600
+        val REQUEST_ANSWER = 601
     }
 }
