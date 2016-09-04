@@ -21,7 +21,11 @@ import java.util.zip.Inflater
 class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolder>() {
 
     val preguntaList: ArrayList<Pregunta>
+    var queryList: ArrayList<Pregunta>? = null
     val mBackground: Int
+
+    val itemList: MutableList<Pregunta>
+     get() = queryList ?: preguntaList
 
     init {
         preguntaList = CrearPreguntas.Companion.completarPreguntas()
@@ -29,10 +33,10 @@ class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolde
         ctx.theme.resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
     }
-    override fun getItemCount() = preguntaList.size
+    override fun getItemCount() = itemList.size
 
     override fun onBindViewHolder(holder: ScoreItemHolder?, position: Int) {
-        val pregunta = preguntaList[position]
+        val pregunta = itemList[position]
         val preguntaHolder = holder!!
         preguntaHolder.bindPregunta(pregunta)
         preguntaHolder.bindScoreItem(pregunta)
@@ -54,5 +58,12 @@ class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolde
                 R.layout.pregunta_text, parent, false), mBackground)
     }
 
+    fun onNewQuery(query: String){
+        Log.d("ActivityFeed", "search $query")
+        if(query.isEmpty())
+            queryList = null
+        else
+            queryList = ArrayList(preguntaList.filter { it.titulo.contains(query) || it.contenido.contains(query) })
+    }
 
 }

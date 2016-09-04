@@ -16,11 +16,13 @@
 
 package espol.ihm.preguntaespol
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +71,17 @@ class MyListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         adapter?.notifyDataSetChanged()
+    }
+
+    fun onNewQuery(query: String?){
+        if(query != null)
+            when(arguments.getInt(FRAGMENT_TYPE, 0)){
+                LS_PREGUNTAS_FRAGMENT -> {
+                    val feedAdapter = adapter as? ActivityFeedAdapter
+                    feedAdapter?.onNewQuery(query)
+                    feedAdapter?.notifyDataSetChanged()
+                }
+            }
     }
 
 }
