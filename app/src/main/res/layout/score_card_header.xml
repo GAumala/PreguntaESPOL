@@ -22,15 +22,9 @@
                     android:id="@+id/pregunta_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="21sp"
+                    android:textSize="16sp"
                     android:text="Como funciona Quicksort?"
-                    />
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:text="ferecamp"
+                     android:textStyle="bold"
                     />
             </LinearLayout>
         </RelativeLayout>
