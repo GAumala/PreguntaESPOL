@@ -16,13 +16,28 @@
     <string name="btn_recompensa_card">CANJEAR</string>
     <string-array
         name="materias_array">
-        <item>Física A</item>
         <item>Álgebra Lineal</item>
-        <item>Estadística</item>
-        <item>Cálculo Integral</item>
-        <item>Cálculo Diferencial</item>
-        <item>Estructuras de Datos</item>
+        <item>Biología</item>
         <item>Análisis de Algoritmos</item>
         <item>Análisis de Redes Eléctricas</item>
+        <item>Cálculo Integral</item>
+        <item>Cálculo Diferencial</item>
+        <item>Cálculo de Varias Variables</item>
+        <item>Ecuaciones Diferenciales</item>
+        <item>Electrónica</item>
+        <item>Ecología</item>
+        <item>Estadística</item>
+        <item>Estructuras de Datos</item>
+        <item>Física A</item>
+        <item>Física B</item>
+        <item>Física C</item>
+        <item>Física D</item>
+        <item>Fundamentos de Computación</item>
+        <item>Fundamentos de Programación</item>
+        <item>Ingeniería de Software</item>
+        <item>Ingeniería Económica</item>
+        <item>Inteligencia Artificial</item>
+        <item>Sistemas Digitales</item>
+        <item>Sistemas Lineales</item>
     </string-array>
 </resources>

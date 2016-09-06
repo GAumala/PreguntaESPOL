@@ -26,13 +26,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import espol.ihm.preguntaespol.utils.DividerItemDecoration
+import espol.ihm.preguntaespol.utils.SimpleArrayAdapter
+import java.util.*
 
 
 class MyListFragment : Fragment() {
 
-    var adapter: Adapter<ScoreItemHolder>? = null
+    var adapter: Adapter<RecyclerView.ViewHolder>? = null
     companion object {
         val FRAGMENT_TYPE = "MyListFragment.fragmentType"
+        val PREGUNTA_FILTER = "MyListFragment.filter"
         val LS_PREGUNTAS_FRAGMENT = 1
         val LS_MATERIAS_FRAGMENT = 2
         val PREGUNTA_FRAGMENT = 3
@@ -40,6 +44,14 @@ class MyListFragment : Fragment() {
             val newInstanceFrag = MyListFragment()
             val newBundle = Bundle()
             newBundle.putInt(FRAGMENT_TYPE, fragmentType)
+            newInstanceFrag.arguments = newBundle
+            return newInstanceFrag
+        }
+        fun newInstance(fragmentType: Int, filter: String): MyListFragment{
+            val newInstanceFrag = MyListFragment()
+            val newBundle = Bundle()
+            newBundle.putInt(FRAGMENT_TYPE, fragmentType)
+            newBundle.putString(PREGUNTA_FILTER, filter)
             newInstanceFrag.arguments = newBundle
             return newInstanceFrag
         }
@@ -55,15 +67,32 @@ class MyListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
         when(arguments.getInt(FRAGMENT_TYPE, 0)){
             LS_PREGUNTAS_FRAGMENT -> {
-                adapter = ActivityFeedAdapter(activity)
+                var preguntas = CrearPreguntas.Companion.completarPreguntas()
+
+                val filter = arguments.getString(PREGUNTA_FILTER)
+                if(filter != null) preguntas = ArrayList(preguntas.filter { it.materia == filter })
+
+                adapter = ActivityFeedAdapter(activity, preguntas) as Adapter<RecyclerView.ViewHolder>
                 recyclerView.adapter = adapter!!
                 val scrollableActivity = activity as ScrollableActivity
                 recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
             }
             PREGUNTA_FRAGMENT -> {
-                adapter = AnswersAdapter(activity,
-                        (activity as PreguntaDetailActivity).selectedPregunta)
+                adapter = AnswersAdapter(activity,(activity as PreguntaDetailActivity).
+                        selectedPregunta) as Adapter<RecyclerView.ViewHolder>
                 recyclerView.adapter = adapter!!
+            }
+            LS_MATERIAS_FRAGMENT -> {
+                val mAdapter = SimpleArrayAdapter(resources.getStringArray(R.array.materias_array))
+                mAdapter.onItemClickListener = object: SimpleArrayAdapter.OnItemClickListener() {
+                    override fun invoke(p1: String) {
+                        (activity as MainActivity).mostrarMateria(p1)
+                    }
+                }
+                adapter = mAdapter
+                recyclerView.adapter = adapter!!
+                recyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+
             }
         }
     }

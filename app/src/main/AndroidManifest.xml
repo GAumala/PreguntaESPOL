@@ -21,6 +21,9 @@
         <activity
             android:name=".AnswerActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:theme="@style/ActionBarStyle"
+            android:name=".materias.MateriaFilterActivity" />
     </application>
 
 </manifest>

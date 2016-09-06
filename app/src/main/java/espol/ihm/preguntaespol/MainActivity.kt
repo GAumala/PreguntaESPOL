@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
+import espol.ihm.preguntaespol.materias.MateriaFilterActivity
 
 class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity {
 
@@ -146,6 +147,12 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         startActivity(intent)
     }
 
+    fun mostrarMateria(materia: String){
+        val intent = Intent(this, MateriaFilterActivity::class.java)
+        intent.putExtra(MateriaFilterActivity.MATERIA_FILTER, materia)
+        startActivity(intent)
+
+    }
     override fun getScrollListener(): RecyclerView.OnScrollListener {
         return myScrollListener
     }

@@ -18,9 +18,8 @@ import java.util.zip.Inflater
  * Created by gesuwall on 8/22/16.
  */
 
-class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolder>() {
+class ActivityFeedAdapter(val ctx: Context, val preguntaList: ArrayList<Pregunta>): RecyclerView.Adapter<ScoreItemHolder>() {
 
-    val preguntaList: ArrayList<Pregunta>
     var queryList: ArrayList<Pregunta>? = null
     val mBackground: Int
 
@@ -28,7 +27,6 @@ class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolde
      get() = queryList ?: preguntaList
 
     init {
-        preguntaList = CrearPreguntas.Companion.completarPreguntas()
         var mTypedValue = TypedValue()
         ctx.theme.resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
