@@ -68,7 +68,7 @@ class PreguntaDetailActivity : AppCompatActivity() {
 
     fun insertarNuevaRespuesta(data: Intent){
         val desc = data!!.getStringExtra(AskActivity.CONTENT_KEY)
-        val newRes = Respuesta(desc, 0, System.currentTimeMillis())
+        val newRes = Respuesta(Usuario.getActualUser(),desc, 0, System.currentTimeMillis())
         selectedPregunta.respuestas.add(newRes)
         val listFragment = supportFragmentManager.findFragmentById(R.id.container) as MyListFragment
         listFragment.adapter?.notifyItemInserted(selectedPregunta.respuestas.size - 1)

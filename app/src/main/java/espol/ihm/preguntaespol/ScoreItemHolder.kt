@@ -120,5 +120,9 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             })
 
         }
+        fun bindRespuesta(item: Respuesta){
+            setUsername(item.usuario.getNombreUsuario())
+            bindScoreItem(item)
+        }
     }
 

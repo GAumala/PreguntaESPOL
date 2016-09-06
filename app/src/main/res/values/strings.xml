@@ -5,7 +5,7 @@
     <string name="form_title_descripcion">Descripción</string>
     <string name="eliminar_btn">ELIMINAR</string>
     <string name="editar_btn">EDITAR</string>
-    <string name="anuncio_placeholder"><b>Lugar:</b> Fiec Nueva Aula 204-5 \n<b>Hora:</b> 10:00 am - 14:00 pm </string>
+    <string name="anuncio_placeholder"><b>Lugar:</b> Fiec Nueva Aula 204–5 \n<b>Hora:</b> 10:00 am – 14:00 pm </string>
     <string name="info_placeholder">Fisica A - Hace 2 min</string>
     <string name="mis_preguntas">Mis Preguntas</string>
     <string name="mis_respuestas">Mis Respuestas</string>
