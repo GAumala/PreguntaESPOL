@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.criptext.monkeykitui.photoview.PhotoViewActivity
+import com.squareup.picasso.Picasso
 import espol.ihm.preguntaespol.utils.Utils
+import java.io.File
 
 /**
  * Created by gesuwall on 8/23/16.
@@ -25,7 +28,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         val root: View
         val editBtn: Button?
         val deleteBtn: Button?
-        val image: ImageView?
+        val photo: ImageView?
 
     init {
             title = view.findViewById(R.id.pregunta_title) as TextView?
@@ -40,11 +43,14 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             root = view.findViewById(R.id.root)
             editBtn = view.findViewById(R.id.image_button_anuncio1) as Button?
             deleteBtn = view.findViewById(R.id.image_button_anuncio2) as Button?
-            image = view.findViewById(R.id.imagen) as ImageView?
+            photo = view.findViewById(R.id.photo_image_view) as ImageView?
             if(mBackground != null)
                 root.setBackgroundResource(mBackground)
         }
 
+        fun revealPhoto(){
+            photo?.visibility = View.VISIBLE
+        }
         fun setUpvoteListener(listener: View.OnClickListener){
             upvote?.setOnClickListener(listener)
         }
@@ -87,8 +93,17 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             leftFooterText.text = "#$leftFooterTextTxt"
         }
 
-        fun setImage(imagen: Int){
-            image?.setImageResource(imagen)
+        fun setPhotoPath(path: String, clickable: Boolean){
+            Picasso.with(itemView.context)
+                    .load(File(path))
+                    .into(photo)
+            if(clickable){
+                photo!!.setOnClickListener({
+                    val intent = Intent(photo.context, PhotoViewActivity::class.java)
+                    intent.putExtra(PhotoViewActivity.IMAGE_DATA_PATH, path)
+                    photo.context?.startActivity(intent)
+                })
+            }
         }
 
         fun setVote(userVote: Int){
@@ -123,20 +138,26 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             setVote(item.scoreUsuario)
             setUpvoteListener(View.OnClickListener {
                 if(item.scoreUsuario != 1){
-                    item.score += 1
-                    item.scoreUsuario += 1
-                    setVote(item.scoreUsuario)
-                    setPoints(item.score)
+                    item.score += 1 - item.scoreUsuario
+                    item.scoreUsuario = 1
+                } else {
+                    item.score -= 1
+                    item.scoreUsuario = 0
                 }
+                setVote(item.scoreUsuario)
+                setPoints(item.score)
             })
 
             setDownvoteListener(View.OnClickListener {
                 if(item.scoreUsuario != -1){
-                    item.score -= 1
-                    item.scoreUsuario -= 1
-                    setVote(item.scoreUsuario)
-                    setPoints(item.score)
+                    item.score -= 1 + item.scoreUsuario
+                    item.scoreUsuario = -1
+                } else {
+                    item.score += 1
+                    item.scoreUsuario = 0
                 }
+                setVote(item.scoreUsuario)
+                setPoints(item.score)
             })
 
         }
@@ -163,7 +184,6 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         fun bindAnuncio(item: ScoreItem){
             item as Anuncio
             setUsername(item.usuario.getNombreUsuario())
-            setImage(item.photoId)
             setSummary(item.contenido)
             setDate(item.date)
             setTitle(item.titulo)

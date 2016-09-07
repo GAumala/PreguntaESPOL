@@ -34,7 +34,8 @@
             <TextView
                 android:id="@+id/pregunta_summary"
                 android:layout_width="match_parent"
-                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="16dp"
                 android:layout_height="wrap_content"
                 android:text="Tengo que implementar quicksort en C. Alguien me puede ayudar con el codigo?"
                 />

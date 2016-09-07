@@ -110,7 +110,7 @@ class MyListFragment : Fragment() {
                 recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
             }
             LS_ANUNCIOS_FRAGMENT -> {
-                adapter = AnunciosAdapter(activity)
+                adapter = AnunciosAdapter(activity) as Adapter<RecyclerView.ViewHolder>
                 recyclerView.adapter = adapter!!
                 val scrollableActivity = activity as ScrollableActivity
                 recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())

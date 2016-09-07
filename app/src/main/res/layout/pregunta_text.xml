@@ -15,9 +15,11 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         card_view:cardElevation="0dp"
         card_view:cardMaxElevation="0dp"
+        android:gravity="center_horizontal"
         android:layout_height="wrap_content">
         <include layout="@layout/score_card_header" />
         <include layout="@layout/score_item_body" />
+        <include layout="@layout/photo_item" />
         <include layout="@layout/score_card_footer" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

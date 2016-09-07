@@ -10,10 +10,12 @@
         android:layout_height="match_parent"
         android:paddingLeft="18dp"
         android:clickable="true"
+        android:gravity="center_horizontal"
         android:paddingRight="18dp"
         android:orientation="vertical">
         <include layout="@layout/respuesta_header" />
         <include layout="@layout/score_item_body" />
+        <include layout="@layout/photo_item" />
         <include layout="@layout/score_card_footer" />
     </LinearLayout>
 

@@ -12,9 +12,11 @@
                 android:clickable="true"
                 android:paddingRight="18dp"
                 android:orientation="vertical"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <include layout="@layout/score_item_body" />
+                <include layout="@layout/photo_item" />
                 <include layout="@layout/score_card_footer" />
             </LinearLayout>
         </android.support.v7.widget.CardView>

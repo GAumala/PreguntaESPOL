@@ -43,15 +43,23 @@ class ActivityFeedAdapter(val ctx: Context, val preguntaList: ArrayList<Pregunta
             (ctx as PreguntasActivity).showPregunta(pregunta)
         })
 
+        if(pregunta.photoPath != null){
+            preguntaHolder.setPhotoPath(pregunta.photoPath!!, false)
+        }
     }
 
     fun addNewPregunta(newPregunta: Pregunta){
         preguntaList.add(0, newPregunta)
     }
 
+    override fun getItemViewType(position: Int) = if(itemList[position].photoPath == null) 0 else 1
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ScoreItemHolder {
-        return ScoreItemHolder(LayoutInflater.from(ctx).inflate(
+        val holder =  ScoreItemHolder(LayoutInflater.from(ctx).inflate(
                 R.layout.pregunta_text, parent, false), mBackground)
+        if(viewType == 1) holder.revealPhoto()
+        return holder
+
     }
 
     fun onNewQuery(query: String){

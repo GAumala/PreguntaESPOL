@@ -15,28 +15,39 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
     override fun getItemCount() = pregunta.respuestas.size + 1
 
     override fun getItemViewType(position: Int): Int {
-        return if(position == 0) PREGUNTA
-        else RESPUESTA
+        return if(position == 0){
+            if(pregunta.photoPath != null) PREGUNTA_FOTO else PREGUNTA
+        }
+        else if(pregunta.respuestas[position - 1].photoPath != null) RESPUESTA_FOTO else RESPUESTA
     }
     override fun onBindViewHolder(holder: ScoreItemHolder?, position: Int) {
         val preguntaHolder = holder!!
+        val scoreItem: ScoreItem
         if( position == 0) { //PREGUNTA
+            scoreItem = pregunta
             preguntaHolder.bindScoreItem(pregunta)
 
-        } else //RESPUESTA
-            preguntaHolder.bindRespuesta(pregunta.respuestas[position - 1])
+        } else {//RESPUESTA
+            val resp = pregunta.respuestas[position - 1]
+            scoreItem = resp
+            preguntaHolder.bindRespuesta(resp)
+        }
+        if(scoreItem.photoPath != null) preguntaHolder.setPhotoPath(scoreItem.photoPath!!, true)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ScoreItemHolder {
         return when(viewType){
-            PREGUNTA -> {
-                PreguntaDetailHolder(LayoutInflater.from(ctx).inflate(
-                    R.layout.pregunta_detail_item, parent, false), getItemCount()-1)
+            PREGUNTA, PREGUNTA_FOTO -> {
+                val holder = PreguntaDetailHolder(LayoutInflater.from(ctx).inflate(
+                    R.layout.pregunta_detail_item, parent, false), itemCount -1)
+                if(viewType == PREGUNTA_FOTO) holder.revealPhoto()
+                holder
             }
             else -> {
                 val item = ScoreItemHolder(LayoutInflater.from(ctx).inflate(
                         R.layout.respuesta_item, parent, false), null)
                 item.leftFooterText.visibility = View.GONE
+                if(viewType == RESPUESTA_FOTO) item.revealPhoto()
                 item
             }
         }
@@ -44,7 +55,9 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
 
     companion object {
         val PREGUNTA = 0
-        val RESPUESTA = 1
+        val PREGUNTA_FOTO = 1
+        val RESPUESTA = 2
+        val RESPUESTA_FOTO = 3
     }
 
 }
