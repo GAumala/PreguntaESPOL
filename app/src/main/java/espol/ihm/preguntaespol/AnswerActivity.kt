@@ -35,7 +35,7 @@ open class AnswerActivity: AppCompatActivity() {
 
         val descStr = descEditText.text
         if(descStr.isEmpty()){
-            descEditText.error = "Por favor ingresa una descripción"
+            descEditText.error = "Por favor ingresar una respuesta"
             isValid = false
         }
 

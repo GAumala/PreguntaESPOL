@@ -18,7 +18,7 @@ import java.util.zip.Inflater
  * Created by gesuwall on 8/22/16.
  */
 
-class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolder>() {
+open class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolder>() {
 
     val preguntaList: ArrayList<Pregunta>
     var queryList: ArrayList<Pregunta>? = null
@@ -41,11 +41,9 @@ class ActivityFeedAdapter(val ctx: Context): RecyclerView.Adapter<ScoreItemHolde
         preguntaHolder.bindPregunta(pregunta)
         preguntaHolder.bindScoreItem(pregunta)
 
-
         preguntaHolder.setOnClickListener(View.OnClickListener {
             (ctx as PreguntasActivity).showPregunta(pregunta)
         })
-
 
     }
 

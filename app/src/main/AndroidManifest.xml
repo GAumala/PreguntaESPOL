@@ -21,6 +21,14 @@
         <activity
             android:name=".AnswerActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MisAnunciosActivity"/>
+        <activity
+            android:name=".MisPreguntasActivity"/>
+        <activity
+            android:name=".MisRespuestasActivity"/>
+        <activity
+            android:name=".MisRecompensasActivity"/>
     </application>
 
 </manifest>

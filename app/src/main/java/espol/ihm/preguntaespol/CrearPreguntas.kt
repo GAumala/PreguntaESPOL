@@ -9,6 +9,10 @@ class CrearPreguntas {
 
     companion object {
 
+        val user1 = Usuario("Fernando Campaña", "ferecamp", 5, "Estudiante", 4900)
+        val user2 = Usuario("Gabriel Aumala", "gaumala", 5, "Estudiante", 4900)
+        val user3 = Usuario("Adriano Pinargote", "apinargo", 3, "Estudiante", 3900)
+
         fun completarPreguntas(): ArrayList<Pregunta> {
 
             val pregunta1 = Pregunta("¿Cómo funciona Quicksort?", "Tengo que implementar Quicksort en C pero no entiendo", 10, 1471478400, "Programación")
@@ -25,11 +29,7 @@ class CrearPreguntas {
             val pregunta10 = Pregunta("¿Cómo encontrar el intervalo de confianza?", "De ser posible incluir un ejemplo", 4, 1468872000, "Estadística")
             val pregunta11 = Pregunta("¿Qué es una mezcla homogénea?", "Pregunta conceptual de química.", 1, 1468699200, "Química")
 
-            val user1 = Usuario("Fernando Campaña", "ferecamp", 5, "Estudiante", 4900)
-            val user2 = Usuario("Gabriel Aumala", "gaumala", 5, "Estudiante", 4900)
-            val user3 = Usuario("Adriano Pinargote", "apinargo", 3, "Estudiante", 3900)
-
-            val respuesta1a = Respuesta(user1 ,"""
+            val respuesta1a = Respuesta(user1 ,pregunta1, """
                     |El algoritmo trabaja de la siguiente forma:
                     |Elegir un elemento de la lista de elementos a ordenar, al que llamaremos pivote.
                     |Resituar los demás elementos de la lista a cada lado del pivote, de manera que a un lado queden todos los menores que él, y al otro los mayores.
@@ -39,47 +39,68 @@ class CrearPreguntas {
                     """.trimMargin(), 10, 1471478400)
             pregunta1.respuestas.add(respuesta1a)
 
-            val respuesta2a = Respuesta(user2,"""
+            val respuesta2a = Respuesta(user2, pregunta2, """
                     |Precisión se refiere a la dispersión del conjunto de valores obtenidos de mediciones repetidas de una magnitud. Cuanto menor es la dispersión mayor la precisión. Una medida común de la variabilidad es la desviación estándar de las mediciones y la precisión se puede estimar como una función de ella. Es importante resaltar que la automatización de diferentes pruebas o técnicas puede producir un aumento de la precisión. Esto se debe a que con dicha automatización, lo que logramos es una disminución de los errores manuales o su corrección inmediata. No hay que confundir resolución con precisión.
                     |Exactitud se refiere a cuán cerca del valor real se encuentra el valor medido. En términos estadísticos, la exactitud está relacionada con el sesgo de una estimación. Cuanto menor es el sesgo más exacta es una estimación. Cuando se expresa la exactitud de un resultado, se expresa mediante el error absoluto que es la diferencia entre el valor experimental y el valor verdadero.
                     """.trimMargin(), 6, 1470409200)
             pregunta2.respuestas.add(respuesta2a)
 
-            val respuesta3a = Respuesta(user3,"A continuación la demostración de la convolución:", 3, 1470668400) //Aqui se necesita una imagen
+            val respuesta3a = Respuesta(user3,pregunta3,"A continuación la demostración de la convolución:", 3, 1470668400) //Aqui se necesita una imagen
             pregunta3.respuestas.add(respuesta3a)
 
-            val respuesta5a = Respuesta(user1, "Interfaz podría hacer referencia al conjunto de métodos que tiene un objeto para poder trabajar con este. Ese conjunto de métodos constituyen la interfaz del objeto (en programación orientada a objetos).", 5, 1470150000)
-            val respuesta5b = Respuesta(user2, "Dispositivo capaz de transformar las señales generadas por un aparato en señales comprensibles por otro.", -3, 1470081600)
+            val respuesta5a = Respuesta(user1,pregunta5, "Interfaz podría hacer referencia al conjunto de métodos que tiene un objeto para poder trabajar con este. Ese conjunto de métodos constituyen la interfaz del objeto (en programación orientada a objetos).", 5, 1470150000)
+            val respuesta5b = Respuesta(user2,pregunta5, "Dispositivo capaz de transformar las señales generadas por un aparato en señales comprensibles por otro.", -3, 1470081600)
             pregunta5.respuestas.addAll(listOf(respuesta5a, respuesta5b))
 
-            val respuesta6a = Respuesta(user2, "CF = CI(1+i)^n donde CF es el capital final, CI es el capital inicial, i es la tasas de interés y n es el plazo o número de periodos.", 5, 1469304000)
+            val respuesta6a = Respuesta(user2,pregunta6, "CF = CI(1+i)^n donde CF es el capital final, CI es el capital inicial, i es la tasas de interés y n es el plazo o número de periodos.", 5, 1469304000)
             pregunta6.respuestas.add(respuesta6a)
 
-            val respuesta7a = Respuesta(user2, """
+            val respuesta7a = Respuesta(user2, pregunta7,"""
                     |Herencia en la programación orientada a objetos es la habilidad de extender una funcionalidad existente definiendo una nueva clase que hereda funcionalidad de una clase existente.
                     |Significa literalmente muchas formas. En programación orientada a objetos es una tecnica para optimizar la funcionalidad basada en tipos particulares.
                     |La diferencia entre herencia y polimorfismo es que herencia está relacionada con clases y polimorfismo con métodos.
                     """.trimMargin(), 10, 1469563200)
             pregunta7.respuestas.add(respuesta7a)
 
-            val respuesta8a = Respuesta(user1, "Aquí esta el método para encontrar la máscara:", 4, 1468699200) //Aqui tambien hace falta una imagen
+            val respuesta8a = Respuesta(user1, pregunta8, "Aquí esta el método para encontrar la máscara:", 4, 1468699200) //Aqui tambien hace falta una imagen
             pregunta8.respuestas.add(respuesta8a)
 
-            val respuesta9a = Respuesta(user2, "La desviación estándar o desviación típica es la raíz cuadrada de la varianza. Es decir, la raíz cuadrada de la media de los cuadrados de las puntuaciones de desviación. La desviación estándar se representa por σ.", 5, 1468785600)
+            val respuesta9a = Respuesta(user2, pregunta9, "La desviación estándar o desviación típica es la raíz cuadrada de la varianza. Es decir, la raíz cuadrada de la media de los cuadrados de las puntuaciones de desviación. La desviación estándar se representa por σ.", 5, 1468785600)
             pregunta9.respuestas.add(respuesta9a)
 
-            val respuesta11a = Respuesta(user3, "Son aquellas mezclas en que sus componentes no se pueden diferenciar a simple vista. Las mezclas homogéneas de líquidos se conocen con el nombre de disoluciones y están constituidas por un soluto y un disolvente, siendo el segundo el que se encuentra en mayor proporción y además suele ser el líquido. Por ejemplo, el agua mezclada con sales minerales o con azúcar, el agua es el disolvente y el azúcar el soluto.", 6, 1468785600)
+            val respuesta11a = Respuesta(Usuario.getActualUser(), pregunta11, "Son aquellas mezclas en que sus componentes no se pueden diferenciar a simple vista. Las mezclas homogéneas de líquidos se conocen con el nombre de disoluciones y están constituidas por un soluto y un disolvente, siendo el segundo el que se encuentra en mayor proporción y además suele ser el líquido. Por ejemplo, el agua mezclada con sales minerales o con azúcar, el agua es el disolvente y el azúcar el soluto.", 6, 1468785600)
             pregunta11.respuestas.add(respuesta11a)
 
             user1.preguntas.add(pregunta2)
             user1.preguntas.add(pregunta3)
             user2.preguntas.add(pregunta1)
 
+            Usuario.getActualUser().preguntas.add(pregunta4)
+            Usuario.getActualUser().respuestas.add(respuesta11a)
+
             val preguntas = arrayListOf(pregunta1, pregunta2, pregunta3, pregunta4, pregunta5, pregunta6, pregunta7, pregunta8, pregunta9, pregunta10, pregunta11)
             return preguntas
 
 
         }
-    }
 
+        fun completarAnuncios(): ArrayList<Anuncio> {
+            val anuncio1 = Anuncio(Usuario.getActualUser(), "MegaAyudantia de Fisica A", "Lugar: Fiec Nueva Aula 204–5 \nHora: 10:00 am – 14:00 pm", 5, 1468785600)
+
+            val anuncios = arrayListOf(anuncio1)
+            return anuncios
+        }
+
+        fun completarMisPreguntas(): ArrayList<Pregunta> {
+            return Usuario.getActualUser().preguntas
+        }
+
+        fun completarMisRespuestas(): ArrayList<Pregunta> {
+            return Usuario.getActualUser().preguntas_respuestas
+        }
+
+        fun completarMisRecompensas(): ArrayList<Recompensa> {
+            return Usuario.getActualUser().recompensas
+        }
+    }
 }
