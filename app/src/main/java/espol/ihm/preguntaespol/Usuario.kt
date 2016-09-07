@@ -8,6 +8,7 @@ import java.util.*
 class Usuario(var nombre: String,var  espol_id: String,var nivel: Int,var titulo: String,var puntos: Int) {
     var preguntas = ArrayList<Pregunta>()
     var respuestas = ArrayList<Respuesta>()
+    var preguntas_respuestas= ArrayList<Pregunta>()
     var anuncios = ArrayList<Anuncio>()
     var recompensas = ArrayList<Recompensa>()
 

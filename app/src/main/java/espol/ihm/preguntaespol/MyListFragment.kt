@@ -40,6 +40,9 @@ class MyListFragment : Fragment() {
         val LS_PREGUNTAS_FRAGMENT = 1
         val LS_MATERIAS_FRAGMENT = 2
         val PREGUNTA_FRAGMENT = 3
+        val LS_ANUNCIOS_FRAGMENT = 4
+        val LS_MIS_PREGUNTAS_FRAGMENT = 5
+        val LS_MIS_RESPUESTAS_FRAGMENT = 6
         fun newInstance(fragmentType: Int): MyListFragment{
             val newInstanceFrag = MyListFragment()
             val newBundle = Bundle()
@@ -94,6 +97,24 @@ class MyListFragment : Fragment() {
                 recyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
 
             }
+            LS_MIS_PREGUNTAS_FRAGMENT -> {
+                adapter = MisPreguntasAdapter(activity) as Adapter<RecyclerView.ViewHolder>
+                recyclerView.adapter = adapter!!
+                val scrollableActivity = activity as ScrollableActivity
+                recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
+            }
+            LS_MIS_RESPUESTAS_FRAGMENT -> {
+                adapter = MisRespuestasAdapter(activity) as Adapter<RecyclerView.ViewHolder>
+                recyclerView.adapter = adapter!!
+                val scrollableActivity = activity as ScrollableActivity
+                recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
+            }
+            //LS_ANUNCIOS_FRAGMENT -> {
+        //    adapter = AnunciosAdapter(activity)
+        //      recyclerView.adapter = adapter!!
+        //      val scrollableActivity = activity as ScrollableActivity
+        //      recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
+        //  }
         }
     }
 

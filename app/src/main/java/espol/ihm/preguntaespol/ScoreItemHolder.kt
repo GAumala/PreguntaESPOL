@@ -1,8 +1,11 @@
 package espol.ihm.preguntaespol
 
+import android.content.Context
+import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import espol.ihm.preguntaespol.utils.Utils
@@ -20,8 +23,10 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         val upvote: ImageView
         val downvote: ImageView
         val root: View
+        val editBtn: Button?
+        val deleteBtn: Button?
 
-        init {
+    init {
             title = view.findViewById(R.id.pregunta_title) as TextView?
             username = view.findViewById(R.id.username) as TextView?
             text = view.findViewById(R.id.pregunta_summary) as TextView
@@ -32,6 +37,8 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             upvote = view.findViewById(R.id.upvote) as ImageView
             downvote = view.findViewById(R.id.downvote) as ImageView
             root = view.findViewById(R.id.root)
+            editBtn = view.findViewById(R.id.image_button_anuncio1) as Button?
+            deleteBtn = view.findViewById(R.id.image_button_anuncio2) as Button?
             if(mBackground != null)
                 root.setBackgroundResource(mBackground)
         }
@@ -42,6 +49,13 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
 
         fun setDownvoteListener(listener: View.OnClickListener){
             downvote.setOnClickListener(listener)
+        }
+        fun setEditBtnListener(listener: View.OnClickListener){
+            editBtn?.setOnClickListener(listener)
+        }
+
+        fun setDeleteBtnListener(listener: View.OnClickListener){
+            deleteBtn?.setOnClickListener(listener)
         }
         fun setTitle(titleText: String){
             title?.text = titleText
@@ -120,9 +134,26 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             })
 
         }
+        fun bindEdit(pregunta: Pregunta, adapter: MisPreguntasAdapter, ctx: Context){
+            setEditBtnListener(View.OnClickListener {
+                val intent = Intent(ctx , AskActivity::class.java)
+                intent.putExtra(MisPreguntasActivity.TITLE_KEY, title?.text.toString())
+                intent.putExtra(MisPreguntasActivity.MATERIA_KEY, leftFooterText?.text.toString())
+                intent.putExtra(MisPreguntasActivity.CONTENT_KEY, text?.text.toString())
+                //startActivityForResult(intent, MainActivity.REQUEST_EDIT);
+            })
+
+            setDeleteBtnListener(View.OnClickListener {
+                Usuario.getActualUser().preguntas.remove(pregunta)
+                adapter.deletePregunta(pregunta)
+                adapter.notifyItemRemoved(adapterPosition)
+            })
+        }
         fun bindRespuesta(item: Respuesta){
             setUsername(item.usuario.getNombreUsuario())
             bindScoreItem(item)
         }
+
+
     }
 

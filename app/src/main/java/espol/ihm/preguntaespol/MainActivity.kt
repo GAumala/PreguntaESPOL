@@ -80,6 +80,12 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true;
             mDrawerLayout.closeDrawers();
+            when (menuItem.itemId ) {
+                R.id.nav_preguntas -> startActivity(Intent(this, MisPreguntasActivity::class.java))
+                R.id.nav_respuestas -> startActivity(Intent(this, MisRespuestasActivity::class.java))
+                R.id.nav_recompensas -> startActivity(Intent(this, MisRecompensasActivity::class.java))
+                R.id.nav_anuncios -> startActivity(Intent(this, MisAnunciosActivity::class.java))
+            }
             true;
         };
     }
@@ -164,6 +170,7 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         val foto = data!!.getStringExtra(AskActivity.PHOTO_KEY)
         val newPregunta = Pregunta(titlo, desc, 0, System.currentTimeMillis(), materia)
         newPregunta.photoPath = foto
+        Usuario.getActualUser().preguntas.add(newPregunta)
         val feedFragment = supportFragmentManager.findFragmentByTag(
                 fragmentAdapter.getFragmentTag(R.id.viewpager, 0)) as MyListFragment
         (feedFragment.adapter as ActivityFeedAdapter).addNewPregunta(newPregunta)
@@ -179,5 +186,6 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         var selectedPregunta: Pregunta? = null
         val REQUEST_ASK = 600
         val REQUEST_ANSWER = 601
-    }
+        val REQUEST_EDIT = 602
+     }
 }

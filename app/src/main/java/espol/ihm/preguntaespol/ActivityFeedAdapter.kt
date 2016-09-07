@@ -39,11 +39,9 @@ class ActivityFeedAdapter(val ctx: Context, val preguntaList: ArrayList<Pregunta
         preguntaHolder.bindPregunta(pregunta)
         preguntaHolder.bindScoreItem(pregunta)
 
-
         preguntaHolder.setOnClickListener(View.OnClickListener {
             (ctx as PreguntasActivity).showPregunta(pregunta)
         })
-
 
     }
 

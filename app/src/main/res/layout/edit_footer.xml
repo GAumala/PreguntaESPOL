@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/anuncio_body"
+    android:paddingLeft="30sp"
+    android:paddingStart="30sp">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/image_button_anuncio1"
+        android:text="@string/editar_btn"
+        android:textStyle="bold"
+        android:textColor="@color/cardText"
+        android:drawableLeft="@drawable/ic_create_black_24dp"
+        android:drawableStart="@drawable/ic_create_black_24dp"
+        android:background="@color/cardBackground"
+        android:drawablePadding="-40sp"
+        android:paddingLeft="10sp"
+        android:paddingStart="10sp"
+        android:paddingRight="10sp"
+        android:paddingEnd="10sp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_button_anuncio2"
+        android:layout_weight="1"
+        android:text="@string/eliminar_btn"
+        android:textStyle="bold"
+        android:textColor="@color/cardText"
+        android:drawableLeft="@drawable/ic_delete"
+        android:drawableStart="@drawable/ic_delete"
+        android:background="@color/cardBackground"
+        android:drawablePadding="-30sp"
+        android:paddingLeft="10sp"
+        android:paddingStart="10sp"
+        android:paddingRight="10sp"
+        android:paddingEnd="10sp"
+        />
+
+</LinearLayout>

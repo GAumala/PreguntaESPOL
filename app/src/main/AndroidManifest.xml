@@ -36,6 +36,14 @@
         <activity
             android:theme="@style/ActionBarStyle"
             android:name="com.criptext.monkeykitui.input.photoEditor.PhotoEditorActivity" />`
+        <activity
+            android:name=".MisAnunciosActivity"/>
+        <activity
+            android:name=".MisPreguntasActivity"/>
+        <activity
+            android:name=".MisRespuestasActivity"/>
+        <activity
+            android:name=".MisRecompensasActivity"/>
     </application>
 
 </manifest>
