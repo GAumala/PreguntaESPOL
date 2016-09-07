@@ -29,6 +29,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         val editBtn: Button?
         val deleteBtn: Button?
         val photo: ImageView?
+        val answers: TextView?
 
     init {
             title = view.findViewById(R.id.pregunta_title) as TextView?
@@ -37,6 +38,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             points = view.findViewById(R.id.points)  as TextView?
             leftFooterText = view.findViewById(R.id.left_footer_text)  as TextView
             time = view.findViewById(R.id.time)  as TextView
+            answers = view.findViewById(R.id.answers)  as TextView?
 
             upvote = view.findViewById(R.id.upvote) as ImageView?
             downvote = view.findViewById(R.id.downvote) as ImageView?
@@ -93,6 +95,12 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             leftFooterText.text = "#$leftFooterTextTxt"
         }
 
+        fun setAnswers(respuestas: Int){
+            if (respuestas > 0){
+                val texto = if (respuestas == 1) " Respuesta" else " Respuestas"
+                answers?.text = respuestas.toString() + texto
+            }
+        }
         fun setPhotoPath(path: String, clickable: Boolean){
             Picasso.with(itemView.context)
                     .load(File(path))
@@ -129,6 +137,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         fun bindPregunta(pregunta: Pregunta){
             setTitle(pregunta.titulo)
             setLeftFooterText(pregunta.materia)
+            setAnswers(pregunta.countRespuestas())
         }
 
         fun bindScoreItem(item: ScoreItem){

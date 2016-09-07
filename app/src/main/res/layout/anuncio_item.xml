@@ -72,7 +72,7 @@
                 android:maxLines="5"
                 android:paddingLeft="10sp"
                 android:paddingStart="10sp"
-                android:paddingTop="5sp"/>
+                android:paddingTop="5sp" />
 
             <include layout="@layout/edit_footer" />
         </RelativeLayout>

@@ -10,7 +10,8 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:paddingLeft="18dp"
         android:clickable="true"
-        android:paddingRight="18dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:id="@+id/root"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         card_view:cardElevation="0dp"
@@ -20,6 +21,5 @@
         <include layout="@layout/score_card_header" />
         <include layout="@layout/score_item_body" />
         <include layout="@layout/photo_item" />
-        <include layout="@layout/score_card_footer" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

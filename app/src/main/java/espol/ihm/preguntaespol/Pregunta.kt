@@ -13,4 +13,8 @@ class Pregunta(var titulo: String, contenido: String, score: Int, date: Long,
     init {
 
     }
+
+    fun countRespuestas(): Int{
+        return respuestas.size
+    }
 }

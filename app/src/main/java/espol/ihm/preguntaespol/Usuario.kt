@@ -17,7 +17,7 @@ class Usuario(var nombre: String,var  espol_id: String,var nivel: Int,var titulo
     }
 
     companion object {
-        val user_default = Usuario("Leonardo Eras", "leras", 5, "Estudiante", 4900)
+        val user_default = Usuario("Usuario", "usuario", 5, "Estudiante", 4900)
         fun getActualUser(): Usuario = user_default
     }
 }

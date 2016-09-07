@@ -4,27 +4,51 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/mk_default_user_img"
-                android:layout_marginRight="8dp"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/avatar"
-                android:layout_height="wrap_content">
-                 <TextView
-                    android:id="@+id/pregunta_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:text="Como funciona Quicksort?"
-                     android:textStyle="bold"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/info"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4sp">
+        <TextView
+            android:id="@+id/left_footer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_placeholder_materia"
+            android:textSize="12sp"
+            />
+        <include layout="@layout/point_divider" />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_placeholder_hora"
+            android:textSize="12sp"
+            />
+        <include layout="@layout/point_divider" />
+        <TextView
+            android:id="@+id/answers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_placeholder_hora"
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/avatar"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info"
+        android:paddingTop="10sp">
+        <TextView
+            android:id="@+id/pregunta_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Como funciona Quicksort?"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+</RelativeLayout>
