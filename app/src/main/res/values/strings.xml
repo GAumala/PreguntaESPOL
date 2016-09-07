@@ -6,7 +6,8 @@
     <string name="eliminar_btn">ELIMINAR</string>
     <string name="editar_btn">EDITAR</string>
     <string name="anuncio_placeholder"><b>Lugar:</b> Fiec Nueva Aula 204–5 \n<b>Hora:</b> 10:00 am – 14:00 pm </string>
-    <string name="info_placeholder">Fisica A - Hace 2 min</string>
+    <string name="info_placeholder_materia">Fisica A -</string>
+    <string name="info_placeholder_hora"> Hace 2 min</string>
     <string name="mis_preguntas">Mis Preguntas</string>
     <string name="mis_respuestas">Mis Respuestas</string>
     <string name="mis_recompensas">Mis Recompensas</string>
@@ -14,6 +15,7 @@
     <string name="placeholder_titulo_anuncio_card">Publicar anuncio de Fisica</string>
     <string name="placeholder_body_anuncio_card">Le permite publicar un anuncio en el feed de Fisica A</string>
     <string name="btn_recompensa_card">CANJEAR</string>
+    <string name="divider">•</string>
     <string-array
         name="materias_array">
         <item>Física A</item>

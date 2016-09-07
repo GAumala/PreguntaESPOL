@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/anuncio_body"
+    android:layout_below="@id/pregunta_summary"
     android:paddingLeft="30sp"
     android:paddingStart="30sp">
     <Button
