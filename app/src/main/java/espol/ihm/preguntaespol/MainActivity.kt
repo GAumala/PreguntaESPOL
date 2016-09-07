@@ -161,7 +161,9 @@ class MainActivity : AppCompatActivity(), ScrollableActivity, PreguntasActivity 
         val titlo = data!!.getStringExtra(AskActivity.TITLE_KEY)
         val desc = data!!.getStringExtra(AskActivity.CONTENT_KEY)
         val materia = data!!.getStringExtra(AskActivity.MATERIA_KEY)
+        val foto = data!!.getStringExtra(AskActivity.PHOTO_KEY)
         val newPregunta = Pregunta(titlo, desc, 0, System.currentTimeMillis(), materia)
+        newPregunta.photoPath = foto
         val feedFragment = supportFragmentManager.findFragmentByTag(
                 fragmentAdapter.getFragmentTag(R.id.viewpager, 0)) as MyListFragment
         (feedFragment.adapter as ActivityFeedAdapter).addNewPregunta(newPregunta)

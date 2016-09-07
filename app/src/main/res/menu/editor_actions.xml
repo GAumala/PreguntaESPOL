@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_attach"
         android:title="Adjuntar"
-        android:icon="@drawable/ic_attach"
+        app:actionLayout="@layout/menu_action_item_badge"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_send"

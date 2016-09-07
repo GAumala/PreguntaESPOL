@@ -53,5 +53,6 @@ class AskActivity : AnswerActivity() {
         val TITLE_KEY = "AskActivity.title"
         val MATERIA_KEY = "AskActivity.materia"
         val CONTENT_KEY = AnswerActivity.CONTENT_KEY
+        val PHOTO_KEY = AnswerActivity.PHOTO_KEY
     }
 }

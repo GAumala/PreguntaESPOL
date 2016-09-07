@@ -9,7 +9,7 @@ import java.util.*
 class Pregunta(var titulo: String, contenido: String, score: Int, date: Long,
                var materia: String): ScoreItem(contenido, score, date) {
     val respuestas =  ArrayList<Respuesta>()
-    var photoId = 0
+    var photoPath: String? = null
     var link = ""
     init {
 

@@ -68,7 +68,9 @@ class PreguntaDetailActivity : AppCompatActivity() {
 
     fun insertarNuevaRespuesta(data: Intent){
         val desc = data!!.getStringExtra(AskActivity.CONTENT_KEY)
+        val photo = data!!.getStringExtra(AskActivity.PHOTO_KEY)
         val newRes = Respuesta(Usuario.getActualUser(),desc, 0, System.currentTimeMillis())
+        newRes.photoPath = photo
         selectedPregunta.respuestas.add(newRes)
         val listFragment = supportFragmentManager.findFragmentById(R.id.container) as MyListFragment
         listFragment.adapter?.notifyItemInserted(selectedPregunta.respuestas.size - 1)

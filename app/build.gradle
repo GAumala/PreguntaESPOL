@@ -31,6 +31,11 @@ dependencies {    compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.mikepenz:actionitembadge:3.3.0@aar'
+    compile ('com.github.Criptext:MonkeyUIAndroid:1.3') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
 
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
