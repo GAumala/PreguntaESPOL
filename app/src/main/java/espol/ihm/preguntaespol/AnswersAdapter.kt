@@ -32,6 +32,10 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
             val resp = pregunta.respuestas[position - 1]
             scoreItem = resp
             preguntaHolder.bindRespuesta(resp)
+            if(resp.usuario == Usuario.getActualUser())
+                preguntaHolder.setAvatar(R.drawable.user)
+            else
+                preguntaHolder.setAvatar(R.drawable.mk_default_user_img)
         }
         if(scoreItem.photoPath != null) preguntaHolder.setPhotoPath(scoreItem.photoPath!!, true)
     }

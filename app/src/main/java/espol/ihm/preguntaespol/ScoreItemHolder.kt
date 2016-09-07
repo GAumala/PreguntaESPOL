@@ -29,6 +29,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         val editBtn: Button?
         val deleteBtn: Button?
         val photo: ImageView?
+        val avatar: ImageView?
 
     init {
             title = view.findViewById(R.id.pregunta_title) as TextView?
@@ -44,6 +45,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             editBtn = view.findViewById(R.id.image_button_anuncio1) as Button?
             deleteBtn = view.findViewById(R.id.image_button_anuncio2) as Button?
             photo = view.findViewById(R.id.photo_image_view) as ImageView?
+            avatar = view.findViewById(R.id.avatar) as ImageView?
             if(mBackground != null)
                 root.setBackgroundResource(mBackground)
         }
@@ -190,6 +192,10 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             setLeftFooterText(item.materia)
         }
 
+    fun setAvatar(id: Int){
+        avatar?.setImageResource(id)
+    }
+
         fun bindEditAnuncio(anuncio: ScoreItem, adapter: AnunciosAdapter, ctx: Context){
             setEditBtnListener(View.OnClickListener {
                 val intent = Intent(ctx , AskActivity::class.java)
@@ -205,5 +211,6 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
                 adapter.notifyItemRemoved(adapterPosition)
             })
         }
+
     }
 

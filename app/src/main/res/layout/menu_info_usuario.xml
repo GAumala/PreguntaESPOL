@@ -10,7 +10,7 @@
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="8dp"
-        android:src="@drawable/mk_default_user_img"
+        android:src="@drawable/user"
         android:layout_marginRight="8dp"/>
     <LinearLayout
         android:id="@+id/linearLayout"
