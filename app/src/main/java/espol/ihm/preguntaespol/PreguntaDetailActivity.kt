@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 
@@ -60,10 +61,23 @@ class PreguntaDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item!!.itemId == android.R.id.home){
-            onBackPressed()
+        when(item!!.itemId){
+            android.R.id.home -> onBackPressed()
+            R.id.action_share -> {
+                val share = Intent(Intent.ACTION_SEND)
+                share.type = "text/plain"
+                share.putExtra(Intent.EXTRA_TEXT, "Puedes responder esta pregunta? -> \n" +
+                "${selectedPregunta.titulo} http://www.preguntaespol.ec/q/${System.currentTimeMillis()}")
+                startActivity(Intent.createChooser(share, "Compartir con..."))
+            }
         }
+
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_actions, menu);
+        return super.onCreateOptionsMenu(menu)
     }
 
     fun insertarNuevaRespuesta(data: Intent){
