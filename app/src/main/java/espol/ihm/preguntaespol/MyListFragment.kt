@@ -96,6 +96,8 @@ class MyListFragment : Fragment() {
                 recyclerView.adapter = adapter!!
                 recyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
 
+                val scrollableActivity = activity as ScrollableActivity
+                recyclerView.addOnScrollListener(scrollableActivity.getScrollListener())
             }
             LS_MIS_PREGUNTAS_FRAGMENT -> {
                 adapter = MisPreguntasAdapter(activity) as Adapter<RecyclerView.ViewHolder>

@@ -67,7 +67,15 @@ class ActivityFeedAdapter(val ctx: Context, val preguntaList: ArrayList<Pregunta
         if(query.isEmpty())
             queryList = null
         else
-            queryList = ArrayList(preguntaList.filter { it.titulo.contains(query) || it.contenido.contains(query) })
+            queryList = ArrayList(preguntaList.filter {
+                val preguntaTitle = it.titulo.toLowerCase()
+                val preguntaContenido = it.contenido.toLowerCase()
+                val lowerCaseQuery = query.toLowerCase()
+
+                preguntaTitle.contains(lowerCaseQuery) || preguntaContenido.contains(lowerCaseQuery)
+            })
+
+
     }
 
 }
