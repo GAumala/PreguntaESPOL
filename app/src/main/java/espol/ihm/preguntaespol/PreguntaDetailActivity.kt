@@ -74,6 +74,7 @@ class PreguntaDetailActivity : AppCompatActivity() {
         selectedPregunta.respuestas.add(newRes)
         val listFragment = supportFragmentManager.findFragmentById(R.id.container) as MyListFragment
         listFragment.adapter?.notifyItemInserted(selectedPregunta.respuestas.size - 1)
+        listFragment.adapter?.notifyItemChanged(0)
         
         var user = Usuario.getActualUser()
         user.respuestas.add(newRes)

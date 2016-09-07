@@ -26,6 +26,7 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
         if( position == 0) { //PREGUNTA
             scoreItem = pregunta
             preguntaHolder.bindScoreItem(pregunta)
+            (preguntaHolder as PreguntaDetailHolder).updateRespTitle(itemCount - 1)
 
         } else {//RESPUESTA
             val resp = pregunta.respuestas[position - 1]
@@ -39,7 +40,7 @@ class AnswersAdapter(val ctx: Context, val pregunta: Pregunta): RecyclerView.Ada
         return when(viewType){
             PREGUNTA, PREGUNTA_FOTO -> {
                 val holder = PreguntaDetailHolder(LayoutInflater.from(ctx).inflate(
-                    R.layout.pregunta_detail_item, parent, false), itemCount -1)
+                    R.layout.pregunta_detail_item, parent, false))
                 if(viewType == PREGUNTA_FOTO) holder.revealPhoto()
                 holder
             }
