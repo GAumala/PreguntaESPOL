@@ -7,28 +7,33 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 
-class MisAnunciosActivity : AppCompatActivity() {
+class MisAnunciosActivity : AppCompatActivity(), ScrollableActivity   {
     lateinit var persistFragment: PersistFragment
+    private val myScrollListener = object : RecyclerView.OnScrollListener(){
+        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
 
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pregunta_detail)
 
         if(savedInstanceState == null) {
             persistFragment = PersistFragment();
-            val fragment = MyListFragment.newInstance(MyListFragment.PREGUNTA_FRAGMENT)
+            val fragment = MyListFragment.newInstance(MyListFragment.LS_ANUNCIOS_FRAGMENT)
             val ft = supportFragmentManager.beginTransaction()
             ft.add(R.id.container, fragment)
             ft.commit()
             setToolbar()
-            //supportFragmentManager.beginTransaction().add(persistFragment, PreguntaDetailActivity.DATA_FRAGMENT).commit()
+            supportFragmentManager.beginTransaction().add(persistFragment, DATA_FRAGMENT).commit()
         }else{
-            persistFragment = supportFragmentManager.findFragmentByTag(PreguntaDetailActivity.DATA_FRAGMENT) as PersistFragment
+            persistFragment = supportFragmentManager.findFragmentByTag(DATA_FRAGMENT) as PersistFragment
             setToolbar()
         }
     }
@@ -61,8 +66,12 @@ class MisAnunciosActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
-
+    override fun getScrollListener(): RecyclerView.OnScrollListener {
+        return myScrollListener
+    }
     companion object {
         val TITLE = "Mis Anuncios"
+        val DATA_FRAGMENT = "MisAnuncios.DataFragment"
+
     }
 }

@@ -18,13 +18,13 @@ import java.util.zip.Inflater
  * Created by Ecotel on 06/09/16.
  */
 
-class AnunciosAdapter(val ctx: Context): RecyclerView.Adapter<AnuncioHolder>() {
+open class AnunciosAdapter(val ctx: Context):  RecyclerView.Adapter<ScoreItemHolder>() {
 
-    val anunciosList: ArrayList<Anuncio>
-    var queryList: ArrayList<Anuncio>? = null
+    val anunciosList: ArrayList<ScoreItem>
+    var queryList: ArrayList<ScoreItem>? = null
     val mBackground: Int
 
-    val itemList: MutableList<Anuncio>
+    val itemList: MutableList<ScoreItem>
         get() = queryList ?: anunciosList
 
     init {
@@ -35,31 +35,21 @@ class AnunciosAdapter(val ctx: Context): RecyclerView.Adapter<AnuncioHolder>() {
     }
     override fun getItemCount() = itemList.size
 
-    override fun onBindViewHolder(holder: AnuncioHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ScoreItemHolder?, position: Int) {
         val anuncio = itemList[position]
-        val anuncioHolder = holder!!
-        ////anuncioHolder.bindAnuncio(anuncio)
+        val preguntaHolder = holder!!
+        preguntaHolder.bindAnuncio(anuncio)
+        preguntaHolder.bindEditAnuncio(anuncio, this, ctx)
 
-        //anuncioHolder.setOnClickListener(View.OnClickListener {
-        //    (ctx as PreguntasActivity).showPregunta(anuncio)
-        //})
     }
 
-    fun addNewAnuncio(newAnuncio: Anuncio){
-        anunciosList.add(0, newAnuncio)
+    fun deleteAnuncio(anuncio: ScoreItem){
+        anunciosList.remove(anuncio)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AnuncioHolder {
-        return AnuncioHolder(LayoutInflater.from(ctx).inflate(
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ScoreItemHolder {
+        return ScoreItemHolder(LayoutInflater.from(ctx).inflate(
                 R.layout.anuncio_item, parent, false), mBackground)
-    }
-
-    fun onNewQuery(query: String){
-        Log.d("Mis Anuncios", "search $query")
-        if(query.isEmpty())
-            queryList = null
-        else
-            queryList = ArrayList(anunciosList.filter { it.titulo.contains(query) || it.contenido.contains(query) })
     }
 
 }

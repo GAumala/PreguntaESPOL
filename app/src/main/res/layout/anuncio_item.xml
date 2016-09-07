@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:card_view="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp">
 
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,6 +9,7 @@
 
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/root"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -26,46 +21,59 @@
             android:layout_height="wrap_content"
                 android:padding="6sp">
                 <TextView
+                    android:id="@+id/left_footer_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/info_placeholder"
+                    android:text="@string/info_placeholder_materia"
                     />
                 <TextView
+                    android:id="@+id/divider"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/divider"
+                    android:paddingLeft="10sp"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    android:paddingRight="10sp"
+                    />
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_placeholder_hora"/>
             </LinearLayout>
 
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/anuncio_autor"
+                android:id="@+id/user_header"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="18dp"
+                android:paddingStart="18dp"
                 android:layout_below="@id/info">
-                <include layout="@layout/score_card_header" />
+                <include layout="@layout/user_header" />
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imagen_anuncio"
+                android:id="@+id/imagen"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
                 android:src="@drawable/imagen_respuesta_1"
-                android:layout_below="@id/anuncio_autor" />
+                android:layout_below="@id/user_header" />
 
             <TextView
-                android:id="@+id/anuncio_body"
+                android:id="@+id/pregunta_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imagen_anuncio"
+                android:layout_below="@id/imagen"
                 android:text="@string/anuncio_placeholder"
                 android:minLines="3"
                 android:maxLines="5"
                 android:paddingLeft="10sp"
+                android:paddingStart="10sp"
                 android:paddingTop="5sp"/>
 
             <include layout="@layout/edit_footer" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
-</LinearLayout>

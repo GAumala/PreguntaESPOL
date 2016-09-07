@@ -1,5 +1,6 @@
 package espol.ihm.preguntaespol
 
+import android.R
 import java.util.*
 
 /**
@@ -84,10 +85,10 @@ class CrearPreguntas {
 
         }
 
-        fun completarAnuncios(): ArrayList<Anuncio> {
-            val anuncio1 = Anuncio(Usuario.getActualUser(), "MegaAyudantia de Fisica A", "Lugar: Fiec Nueva Aula 204–5 \nHora: 10:00 am – 14:00 pm", 5, 1468785600)
-
-            val anuncios = arrayListOf(anuncio1)
+        fun completarAnuncios(): ArrayList<ScoreItem> {
+            val anuncio1 = Anuncio(Usuario.getActualUser(), "MegaAyudantia de Fisica A", "Fisica", "Lugar: Fiec Nueva Aula 204–5 \nHora: 10:00 am – 14:00 pm", 5, 1468785600)
+            anuncio1.setImage(R.drawable.ic_dialog_alert)
+            val anuncios = arrayListOf(anuncio1) as ArrayList<ScoreItem>
             return anuncios
         }
 

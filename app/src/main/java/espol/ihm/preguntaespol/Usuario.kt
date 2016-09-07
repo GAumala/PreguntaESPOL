@@ -9,7 +9,7 @@ class Usuario(var nombre: String,var  espol_id: String,var nivel: Int,var titulo
     var preguntas = ArrayList<Pregunta>()
     var respuestas = ArrayList<Respuesta>()
     var preguntas_respuestas= ArrayList<Pregunta>()
-    var anuncios = ArrayList<Anuncio>()
+    var anuncios = ArrayList<ScoreItem>()
     var recompensas = ArrayList<Recompensa>()
 
     fun getNombreUsuario(): String{

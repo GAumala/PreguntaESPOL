@@ -17,38 +17,40 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         val title: TextView?
         val username: TextView?
         val text: TextView
-        val points: TextView
+        val points: TextView?
         val leftFooterText: TextView
         val time: TextView
-        val upvote: ImageView
-        val downvote: ImageView
+        val upvote: ImageView?
+        val downvote: ImageView?
         val root: View
         val editBtn: Button?
         val deleteBtn: Button?
+        val image: ImageView?
 
     init {
             title = view.findViewById(R.id.pregunta_title) as TextView?
             username = view.findViewById(R.id.username) as TextView?
             text = view.findViewById(R.id.pregunta_summary) as TextView
-            points = view.findViewById(R.id.points)  as TextView
+            points = view.findViewById(R.id.points)  as TextView?
             leftFooterText = view.findViewById(R.id.left_footer_text)  as TextView
             time = view.findViewById(R.id.time)  as TextView
 
-            upvote = view.findViewById(R.id.upvote) as ImageView
-            downvote = view.findViewById(R.id.downvote) as ImageView
+            upvote = view.findViewById(R.id.upvote) as ImageView?
+            downvote = view.findViewById(R.id.downvote) as ImageView?
             root = view.findViewById(R.id.root)
             editBtn = view.findViewById(R.id.image_button_anuncio1) as Button?
             deleteBtn = view.findViewById(R.id.image_button_anuncio2) as Button?
+            image = view.findViewById(R.id.imagen) as ImageView?
             if(mBackground != null)
                 root.setBackgroundResource(mBackground)
         }
 
         fun setUpvoteListener(listener: View.OnClickListener){
-            upvote.setOnClickListener(listener)
+            upvote?.setOnClickListener(listener)
         }
 
         fun setDownvoteListener(listener: View.OnClickListener){
-            downvote.setOnClickListener(listener)
+            downvote?.setOnClickListener(listener)
         }
         fun setEditBtnListener(listener: View.OnClickListener){
             editBtn?.setOnClickListener(listener)
@@ -74,7 +76,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
         }
 
         fun setPoints(score: Int){
-            points.text = "$score"
+            points?.text = "$score"
         }
 
         fun setDate(dateMilis: Long){
@@ -85,19 +87,23 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             leftFooterText.text = "#$leftFooterTextTxt"
         }
 
+        fun setImage(imagen: Int){
+            image?.setImageResource(imagen)
+        }
+
         fun setVote(userVote: Int){
             if(userVote == 0){
-                upvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up))
-                downvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_down))
-                points.setTextColor(ContextCompat.getColor(points.context, R.color.neutral))
+                upvote?.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up))
+                downvote?.setImageDrawable(ContextCompat.getDrawable(upvote?.context, R.drawable.ic_thumb_down))
+                points?.setTextColor(ContextCompat.getColor(points.context, R.color.neutral))
             } else if(userVote == 1){
-                upvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up_pressed))
-                downvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_down))
-                points.setTextColor(ContextCompat.getColor(points.context, R.color.upvote))
+                upvote?.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up_pressed))
+                downvote?.setImageDrawable(ContextCompat.getDrawable(upvote?.context, R.drawable.ic_thumb_down))
+                points?.setTextColor(ContextCompat.getColor(points.context, R.color.upvote))
             } else {
-                upvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up))
-                downvote.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_down_pressed))
-                points.setTextColor(ContextCompat.getColor(points.context, R.color.downvote))
+                upvote?.setImageDrawable(ContextCompat.getDrawable(upvote.context, R.drawable.ic_thumb_up))
+                downvote?.setImageDrawable(ContextCompat.getDrawable(upvote?.context, R.drawable.ic_thumb_down_pressed))
+                points?.setTextColor(ContextCompat.getColor(points.context, R.color.downvote))
             }
         }
 
@@ -145,7 +151,7 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
 
             setDeleteBtnListener(View.OnClickListener {
                 Usuario.getActualUser().preguntas.remove(pregunta)
-                adapter.deletePregunta(pregunta)
+                adapter.deletePregunta(pregunta as Pregunta)
                 adapter.notifyItemRemoved(adapterPosition)
             })
         }
@@ -154,6 +160,30 @@ open class ScoreItemHolder(view: View, mBackground: Int?): RecyclerView.ViewHold
             bindScoreItem(item)
         }
 
+        fun bindAnuncio(item: ScoreItem){
+            item as Anuncio
+            setUsername(item.usuario.getNombreUsuario())
+            setImage(item.photoId)
+            setSummary(item.contenido)
+            setDate(item.date)
+            setTitle(item.titulo)
+            setLeftFooterText(item.materia)
+        }
 
+        fun bindEditAnuncio(anuncio: ScoreItem, adapter: AnunciosAdapter, ctx: Context){
+            setEditBtnListener(View.OnClickListener {
+                val intent = Intent(ctx , AskActivity::class.java)
+                intent.putExtra(MisPreguntasActivity.TITLE_KEY, title?.text.toString())
+                intent.putExtra(MisPreguntasActivity.MATERIA_KEY, leftFooterText?.text.toString())
+                intent.putExtra(MisPreguntasActivity.CONTENT_KEY, text?.text.toString())
+                //startActivityForResult(intent, MainActivity.REQUEST_EDIT);
+            })
+
+            setDeleteBtnListener(View.OnClickListener {
+                Usuario.getActualUser().anuncios.remove(anuncio)
+                adapter.deleteAnuncio(anuncio as Anuncio)
+                adapter.notifyItemRemoved(adapterPosition)
+            })
+        }
     }
 
